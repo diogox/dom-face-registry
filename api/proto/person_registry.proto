@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package DomFaceRegistry;
+
+import "types.proto";
+
+message GetPeopleRequest {}
+
+message GetPeopleResponse {
+    repeated Person people = 1;
+}
+
+message AddPersonRequest {
+    string first_name = 1;
+    string last_name = 2;
+    repeated PersonRole roles = 3;
+}
+
+message AddPersonResponse {
+    string person_id = 1;
+}
+
+message RemovePersonRequest {
+    string id = 1;
+}
+
+message RemovePersonResponse {
+}

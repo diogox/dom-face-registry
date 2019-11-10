@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package DomFaceRegistry;
+
+import "types.proto";
+
+message RecognizeFaceResponse {
+    Person person_info = 1;
+}
+
+message AddFaceRequest {
+    string person_id = 1;
+    FaceImage face_image = 2;
+}
+
+message AddFaceResponse {
+    string id = 1;
+}
+
+message RemoveFaceRequest {
+    string face_id = 1;
+}
+
+message RemoveFaceResponse {}

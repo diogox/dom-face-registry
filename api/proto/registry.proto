@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package DomFaceRegistry;
+
+import "types.proto";
+import "person_registry.proto";
+import "face_registry.proto";
+
+service FaceRegistry {
+    rpc GetPeople(GetPeopleRequest) returns (GetPeopleResponse) {}
+    rpc AddPerson(AddPersonRequest) returns (AddPersonResponse) {}
+    rpc RemovePerson(RemovePersonRequest) returns (RemovePersonResponse) {}
+
+    rpc RecognizeFace(stream FaceImage) returns (RecognizeFaceResponse) {}
+    rpc AddFace(stream AddFaceRequest) returns (AddFaceResponse) {}
+    rpc RemoveFace(RemoveFaceRequest) returns (RemoveFaceResponse) {}
+}

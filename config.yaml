@@ -1,0 +1,13 @@
+server:
+  debug: true
+  port: 8080
+  recognition:
+    threshold: 0.6
+    dlib_models_dir: "/go/src/github.com/diogox/dom-face-recognizer/data/models"
+
+database:
+  host: "mongo"
+  port: 27017
+  db_name: "dom-face-registry"
+  people_collection: "people"
+  faces_collection: "faces"

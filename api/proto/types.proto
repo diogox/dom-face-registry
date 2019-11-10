@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package DomFaceRegistry;
+
+message FaceImage {
+    bytes image_data = 1;
+}
+
+enum PersonRole {
+    INHABITANT = 0;
+    GUEST = 1;
+    TRANSIENT = 2;
+    FAMILY_MEMBER = 3;
+}
+
+message Person {
+    string id = 1;
+    string first_name = 2;
+    string last_name = 3;
+    repeated PersonRole roles = 4;
+}
+
