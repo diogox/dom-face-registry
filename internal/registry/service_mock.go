@@ -6,6 +6,7 @@ package registry
 
 import (
 	context "context"
+	face "github.com/diogox/dom-face-recognizer/internal/face"
 	person "github.com/diogox/dom-face-recognizer/internal/person"
 	gomock "github.com/golang/mock/gomock"
 	uuid "github.com/google/uuid"
@@ -129,6 +130,21 @@ func (m *MockFaceService) RecognizeFace(ctx context.Context, imgBytes []byte) (u
 func (mr *MockFaceServiceMockRecorder) RecognizeFace(ctx, imgBytes interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecognizeFace", reflect.TypeOf((*MockFaceService)(nil).RecognizeFace), ctx, imgBytes)
+}
+
+// FindFacesByPersonID mocks base method
+func (m *MockFaceService) FindFacesByPersonID(ctx context.Context, personID uuid.UUID) ([]face.Face, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "FindFacesByPersonID", ctx, personID)
+	ret0, _ := ret[0].([]face.Face)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// FindFacesByPersonID indicates an expected call of FindFacesByPersonID
+func (mr *MockFaceServiceMockRecorder) FindFacesByPersonID(ctx, personID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "FindFacesByPersonID", reflect.TypeOf((*MockFaceService)(nil).FindFacesByPersonID), ctx, personID)
 }
 
 // AddFace mocks base method
