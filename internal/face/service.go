@@ -2,7 +2,6 @@ package face
 
 import (
 	"context"
-
 	"github.com/google/uuid"
 	"github.com/pkg/errors"
 
@@ -15,6 +14,7 @@ const (
 
 type Store interface {
 	GetFaces(ctx context.Context) ([]Face, error)
+	FindFacesByPersonID(ctx context.Context, personID uuid.UUID) ([]Face, error)
 	AddFace(ctx context.Context, encoding recognizer.FaceEncoding, imgBytes []byte, personID uuid.UUID) (faceID uuid.UUID, err error)
 	RemoveFace(ctx context.Context, faceID uuid.UUID) error
 }
@@ -55,6 +55,10 @@ func (s *Service) RecognizeFace(ctx context.Context, imgBytes []byte) (uuid.UUID
 	}
 
 	return personID, nil
+}
+
+func (s *Service) FindFacesByPersonID(ctx context.Context, personID uuid.UUID) ([]Face, error) {
+	return s.store.FindFacesByPersonID(ctx, personID)
 }
 
 func (s *Service) AddFace(ctx context.Context, imgBytes []byte, personID uuid.UUID) (faceID uuid.UUID, err error) {
