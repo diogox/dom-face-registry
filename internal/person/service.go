@@ -8,6 +8,7 @@ import (
 
 type Store interface {
 	GetPeople(ctx context.Context) ([]Person, error)
+	FindPersonByID(ctx context.Context, id uuid.UUID) (Person, error)
 	CreatePerson(ctx context.Context, person Person) error
 	DeletePerson(ctx context.Context, id uuid.UUID) error
 }
@@ -24,6 +25,10 @@ func NewService(store Store) *Service {
 
 func (p *Service) GetPeople(ctx context.Context) ([]Person, error) {
 	return p.store.GetPeople(ctx)
+}
+
+func (p *Service) FindPersonByID(ctx context.Context, id uuid.UUID) (Person, error) {
+	return p.store.FindPersonByID(ctx, id)
 }
 
 func (p *Service) AddPerson(ctx context.Context, person Person) error {

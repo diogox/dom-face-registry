@@ -84,6 +84,49 @@ func (s *Store) mapPeopleToExternalType(people []Person) ([]person.Person, error
 	return pp, nil
 }
 
+func (s *Store) FindPersonByID(ctx context.Context, id uuid.UUID) (person.Person, error) {
+	const IDKey = "_id"
+
+	cur, err := s.collection.Find(ctx, bson.M{
+		IDKey: id,
+	})
+	if err != nil {
+		return person.Person{}, errors.Wrap(err, errMongoFailedToGetPersonByID)
+	}
+	defer cur.Close(ctx)
+
+	var people []Person
+	for cur.Next(ctx) {
+		var p Person
+
+		err := cur.Decode(&p)
+		if err != nil {
+			return person.Person{}, errors.Wrap(err, errMongoFailedToDecodePerson)
+		}
+
+		people = append(people, p)
+	}
+
+	if err := cur.Err(); err != nil {
+		return person.Person{}, errors.Wrap(err, errMongoFailedToGetPeople)
+	}
+
+	if len(people) == 0 {
+		return person.Person{}, errors.New(errMongoNotFound)
+	}
+
+	if len(people) > 1 {
+		return person.Person{}, errors.New("found more than one person with that ID")
+	}
+
+	res, err := s.mapPeopleToExternalType(people)
+	if err != nil {
+		return person.Person{}, errors.Wrap(err, "failed to convert people to expected type")
+	}
+
+	return res[0], nil
+}
+
 func (s *Store) CreatePerson(ctx context.Context, person person.Person) error {
 	// TODO: Make sure there are no other people with the same info
 
