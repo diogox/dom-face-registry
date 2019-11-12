@@ -17,6 +17,4 @@ RUN wget -P $DLIB_MODELS_DIRECTORY http://dlib.net/files/dlib_face_recognition_r
 RUN wget -P $DLIB_MODELS_DIRECTORY http://dlib.net/files/mmod_human_face_detector.dat.bz2 \
     && bzip2 -d $DLIB_MODELS_DIRECTORY/mmod_human_face_detector.dat.bz2
 
-#ENTRYPOINT 8080
-
 CMD ["go", "run", "cmd/server/main.go"]
