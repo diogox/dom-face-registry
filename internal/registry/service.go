@@ -47,6 +47,10 @@ func (s *Service) GetPeople(ctx context.Context) ([]person.Person, error) {
 
 func (s *Service) AddPerson(ctx context.Context, personInfo person.Person) error {
 	// TODO: Handle errors better. Check for missing personInfo fields. (use `validate` tags for that?)
+	if personInfo.ID == uuid.Nil {
+		return errors.New(errMissingPersonInfo)
+	}
+
 	return s.personService.AddPerson(ctx, personInfo)
 }
 
