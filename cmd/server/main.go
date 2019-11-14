@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/diogox/dom-face-recognizer/internal/config"
+	"github.com/diogox/dom-face-registry/internal/config"
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -12,14 +12,14 @@ import (
 	"net"
 	"os"
 
-	"github.com/diogox/dom-face-recognizer/internal/face"
-	"github.com/diogox/dom-face-recognizer/internal/face/recognizer"
-	faceMongo "github.com/diogox/dom-face-recognizer/internal/face/store/mongo"
-	DomFaceRegistry "github.com/diogox/dom-face-recognizer/internal/pb"
-	"github.com/diogox/dom-face-recognizer/internal/person"
-	personMongo "github.com/diogox/dom-face-recognizer/internal/person/store/mongo"
-	"github.com/diogox/dom-face-recognizer/internal/registry"
-	grpcImpl "github.com/diogox/dom-face-recognizer/internal/transport/grpc"
+	"github.com/diogox/dom-face-registry/internal/face"
+	"github.com/diogox/dom-face-registry/internal/face/recognizer"
+	faceMongo "github.com/diogox/dom-face-registry/internal/face/store/mongo"
+	DomFaceRegistry "github.com/diogox/dom-face-registry/internal/pb"
+	"github.com/diogox/dom-face-registry/internal/person"
+	personMongo "github.com/diogox/dom-face-registry/internal/person/store/mongo"
+	"github.com/diogox/dom-face-registry/internal/registry"
+	grpcImpl "github.com/diogox/dom-face-registry/internal/transport/grpc"
 )
 
 func main() {

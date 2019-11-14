@@ -3,8 +3,8 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/diogox/dom-face-recognizer/pkg/client"
-	pb "github.com/diogox/dom-face-recognizer/pkg/registry"
+	"github.com/diogox/dom-face-registry/pkg/client"
+	pb "github.com/diogox/dom-face-registry/pkg/registry"
 	"io/ioutil"
 	"log"
 	"os"

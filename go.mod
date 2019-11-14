@@ -1,4 +1,4 @@
-module github.com/diogox/dom-face-recognizer
+module github.com/diogox/dom-face-registry
 
 go 1.13
 

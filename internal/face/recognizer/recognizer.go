@@ -1,25 +1,27 @@
+//go:generate mockgen -package=recognizer -source=./recognizer.go -destination=./recognizer_mock.go -self_package=github.com/diogox/dom-face-registry/internal/face/recognizer
+
 package recognizer
 
 import (
-	"github.com/Kagami/go-face"
+	goface "github.com/Kagami/go-face"
 	"github.com/google/uuid"
 	"github.com/pkg/errors"
 )
 
-type FaceEncoding face.Descriptor
+type Encoding goface.Descriptor
 
 type Recognizer interface {
-	Recognize(targetFaceEncoding FaceEncoding, peopleIDs []uuid.UUID, allFaceEncondings []FaceEncoding) (uuid.UUID, error)
-	EncodeFace(imgBytes []byte) (FaceEncoding, error)
+	Recognize(targetFaceEncoding Encoding, peopleIDs []uuid.UUID, allFaceEncondings []Encoding) (uuid.UUID, error)
+	EncodeFace(imgBytes []byte) (Encoding, error)
 }
 
 type recognizer struct {
-	recognizer        *face.Recognizer
+	recognizer        *goface.Recognizer
 	classifyThreshold float32
 }
 
 func NewRecognizer(dlibModelsPath string, classifyThreshold float32) (*recognizer, error) {
-	rec, err := face.NewRecognizer(dlibModelsPath)
+	rec, err := goface.NewRecognizer(dlibModelsPath)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed at initializing face recognizer")
 	}
@@ -31,15 +33,15 @@ func NewRecognizer(dlibModelsPath string, classifyThreshold float32) (*recognize
 }
 
 func (r *recognizer) Recognize(
-	targetFaceEnding FaceEncoding,
+	targetFaceEnding Encoding,
 	peopleIDs []uuid.UUID,
-	allFaceEncodings []FaceEncoding,
+	allFaceEncodings []Encoding,
 ) (uuid.UUID, error) {
 
 	// Set Samples
-	var samples []face.Descriptor
+	var samples []goface.Descriptor
 	for _, fe := range allFaceEncodings {
-		samples = append(samples, face.Descriptor(fe))
+		samples = append(samples, goface.Descriptor(fe))
 	}
 
 	categories := make([]int32, 0, len(peopleIDs))
@@ -51,7 +53,7 @@ func (r *recognizer) Recognize(
 
 	r.recognizer.SetSamples(samples, categories)
 
-	categoryID := r.recognizer.ClassifyThreshold(face.Descriptor(targetFaceEnding), r.classifyThreshold)
+	categoryID := r.recognizer.ClassifyThreshold(goface.Descriptor(targetFaceEnding), r.classifyThreshold)
 	if categoryID < 0 {
 		return uuid.Nil, errors.New("unable to classify image")
 	}
@@ -59,13 +61,13 @@ func (r *recognizer) Recognize(
 	return categoriesLabelsMap[categoryID], nil
 }
 
-func (r *recognizer) EncodeFace(imgBytes []byte) (FaceEncoding, error) {
+func (r *recognizer) EncodeFace(imgBytes []byte) (Encoding, error) {
 	f, err := r.recognizer.RecognizeSingle(imgBytes)
 	if err != nil {
-		return FaceEncoding{}, errors.Wrap(err, "failed to encode face")
+		return Encoding{}, errors.Wrap(err, "failed to encode face")
 	}
 
-	faceEncoding := FaceEncoding(f.Descriptor)
+	faceEncoding := Encoding(f.Descriptor)
 	return faceEncoding, nil
 }
 

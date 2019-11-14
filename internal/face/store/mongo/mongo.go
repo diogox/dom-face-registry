@@ -8,8 +8,8 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 
-	"github.com/diogox/dom-face-recognizer/internal/face"
-	"github.com/diogox/dom-face-recognizer/internal/face/recognizer"
+	"github.com/diogox/dom-face-registry/internal/face"
+	"github.com/diogox/dom-face-registry/internal/face/recognizer"
 )
 
 // TODO: Ensure indexes?

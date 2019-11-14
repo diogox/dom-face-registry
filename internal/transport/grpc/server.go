@@ -8,8 +8,8 @@ import (
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 
-	pb "github.com/diogox/dom-face-recognizer/internal/pb"
-	"github.com/diogox/dom-face-recognizer/internal/person"
+	pb "github.com/diogox/dom-face-registry/internal/pb"
+	"github.com/diogox/dom-face-registry/internal/person"
 )
 
 type RegistryService interface {

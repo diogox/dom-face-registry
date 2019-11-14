@@ -30,3 +30,8 @@ Bear in mind, like I said above, the service takes a while to get started...
 
 * The name starts with `dom` because I made this as part of making a 
 home management system. And "Dom" is Polish for "Home". I'm not Polish, though. :portugal:
+
+## TODO
+[ ] Write unit tests
+
+[ ] Implement CI/CD

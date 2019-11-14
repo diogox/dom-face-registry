@@ -9,7 +9,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 
-	"github.com/diogox/dom-face-recognizer/internal/person"
+	"github.com/diogox/dom-face-registry/internal/person"
 )
 
 // TODO: Ensure indexes?

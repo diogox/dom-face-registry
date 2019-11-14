@@ -1,16 +1,16 @@
-//go:generate mockgen -package registry -source=service.go -destination service_mock.go
+//go:generate mockgen -package registry -source=service.go -destination service_mocks.go
 
 package registry
 
 import (
 	"context"
-	"github.com/diogox/dom-face-recognizer/internal/face"
+	"github.com/diogox/dom-face-registry/internal/face"
 
 	"github.com/google/uuid"
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 
-	"github.com/diogox/dom-face-recognizer/internal/person"
+	"github.com/diogox/dom-face-registry/internal/person"
 )
 
 type PersonService interface {

@@ -2,7 +2,7 @@ package client
 
 import (
 	"errors"
-	pb "github.com/diogox/dom-face-recognizer/pkg/registry"
+	pb "github.com/diogox/dom-face-registry/pkg/registry"
 	"google.golang.org/grpc"
 )
 

@@ -1,6 +1,6 @@
 package mongo
 
-import "github.com/diogox/dom-face-recognizer/internal/face/recognizer"
+import "github.com/diogox/dom-face-registry/internal/face/recognizer"
 
 type Face struct {
 	ID string `bson:"_id"`

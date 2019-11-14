@@ -3,7 +3,7 @@ package person
 import (
 	"github.com/google/uuid"
 
-	pb "github.com/diogox/dom-face-recognizer/internal/pb"
+	pb "github.com/diogox/dom-face-registry/internal/pb"
 )
 
 type Converter struct {}

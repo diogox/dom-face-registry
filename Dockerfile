@@ -1,10 +1,10 @@
 FROM docker.io/ndphu/ubuntu-go-dlib
 
-WORKDIR /go/src/github.com/diogox/dom-face-recognizer
+WORKDIR /go/src/github.com/diogox/dom-face-registry
 
 COPY . .
 
-ARG DLIB_MODELS_DIRECTORY=/go/src/github.com/diogox/dom-face-recognizer/data/models
+ARG DLIB_MODELS_DIRECTORY=/go/src/github.com/diogox/dom-face-registry/data/models
 
 RUN mkdir -p $DLIB_MODELS_DIRECTORY
 

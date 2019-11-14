@@ -1,11 +1,13 @@
+//go:generate mockgen -package=face -source=./service.go -destination=./service_mocks.go -self_package=github.com/diogox/dom-face-registry/internal/face
+
 package face
 
 import (
 	"context"
+	"github.com/diogox/dom-face-registry/internal/face/recognizer"
+
 	"github.com/google/uuid"
 	"github.com/pkg/errors"
-
-	"github.com/diogox/dom-face-recognizer/internal/face/recognizer"
 )
 
 const (
@@ -15,7 +17,7 @@ const (
 type Store interface {
 	GetFaces(ctx context.Context) ([]Face, error)
 	FindFacesByPersonID(ctx context.Context, personID uuid.UUID) ([]Face, error)
-	AddFace(ctx context.Context, encoding recognizer.FaceEncoding, imgBytes []byte, personID uuid.UUID) (faceID uuid.UUID, err error)
+	AddFace(ctx context.Context, encoding recognizer.Encoding, imgBytes []byte, personID uuid.UUID) (faceID uuid.UUID, err error)
 	RemoveFace(ctx context.Context, faceID uuid.UUID) error
 }
 
@@ -38,7 +40,7 @@ func (s *Service) RecognizeFace(ctx context.Context, imgBytes []byte) (uuid.UUID
 	}
 
 	var peopleIDs []uuid.UUID
-	var allFaceEncodings []recognizer.FaceEncoding
+	var allFaceEncodings []recognizer.Encoding
 	for _, f := range faces {
 		peopleIDs = append(peopleIDs, f.PersonID)
 		allFaceEncodings = append(allFaceEncodings, f.Encoding)

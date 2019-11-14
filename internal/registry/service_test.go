@@ -3,10 +3,10 @@ package registry
 import (
 	"context"
 	"errors"
-	"github.com/diogox/dom-face-recognizer/internal/face"
+	"github.com/diogox/dom-face-registry/internal/face"
 	"testing"
 
-	"github.com/diogox/dom-face-recognizer/internal/person"
+	"github.com/diogox/dom-face-registry/internal/person"
 	"github.com/golang/mock/gomock"
 	"github.com/google/uuid"
 	"github.com/sirupsen/logrus"
