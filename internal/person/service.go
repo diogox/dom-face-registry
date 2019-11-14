@@ -1,3 +1,5 @@
+//go:generate mockgen -package=person -source=./service.go -destination=./service_mocks.go -self_package=github.com/diogox/dom-face-registry/internal/person
+
 package person
 
 import (
