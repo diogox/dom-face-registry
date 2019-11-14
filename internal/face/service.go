@@ -11,6 +11,7 @@ import (
 )
 
 const (
+	errNoFacesFound = "no faces found in store"
 	errFaceNotRecognized = "could not recognize face"
 )
 
@@ -37,6 +38,10 @@ func (s *Service) RecognizeFace(ctx context.Context, imgBytes []byte) (uuid.UUID
 	faces, err := s.store.GetFaces(ctx)
 	if err != nil {
 		return uuid.Nil, err
+	}
+
+	if len(faces) == 0 {
+		return uuid.Nil, errors.New(errNoFacesFound)
 	}
 
 	var peopleIDs []uuid.UUID
