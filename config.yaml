@@ -3,9 +3,11 @@ server:
   port: 8080
   recognition:
     threshold: 0.6
+    #dlib_models_dir: "./data/models"
     dlib_models_dir: "/go/src/github.com/diogox/dom-face-registry/data/models"
 
 database:
+  #host: "localhost"
   host: "mongo"
   port: 27017
   db_name: "dom-face-registry"
