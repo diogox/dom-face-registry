@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"log"
 	"os"
@@ -19,6 +20,10 @@ func main() {
 const endpoint = ":8080"
 
 func run() error {
+	if len(os.Args) != 2 {
+		return errors.New("need person id as argument")
+	}
+
 	faceId := os.Args[1]
 
 	c, conn, err := client.NewClientBuilder().
