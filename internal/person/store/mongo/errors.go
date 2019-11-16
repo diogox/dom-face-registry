@@ -12,5 +12,4 @@ const (
 	errMongoFailedToDeletePerson = "could not remove person in mongo"
 
 	errMongoInvalidID = "invalid id, could not convert"
-	errMongoNotFound = "not found"
 )
