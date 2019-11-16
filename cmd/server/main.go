@@ -72,7 +72,9 @@ func run(cfg config.Config, logger logrus.FieldLogger) error {
 	if err != nil {
 		return errors.Wrap(err, "failed to connect to mongo")
 	}
-	defer client.Disconnect(ctx)
+	defer func() {
+		_ = client.Disconnect(ctx)
+	}()
 
 	peopleStore, err := personMongo.NewStore(ctx, client, cfg.Database.DBName, cfg.Database.PeopleCollection)
 	if err != nil {

@@ -79,7 +79,7 @@ func (s *Service) RemovePerson(ctx context.Context, personID uuid.UUID) error {
 func (s *Service) RecognizeFace(ctx context.Context, imgBytes []byte) (person.Person, error) {
 	// TODO: Use 'validate' for this?
 
-	if imgBytes == nil || len(imgBytes) == 0 {
+	if len(imgBytes) == 0 {
 		return person.Person{}, errors.New(errMissingImage)
 	}
 
@@ -100,7 +100,7 @@ func (s *Service) RecognizeFace(ctx context.Context, imgBytes []byte) (person.Pe
 func (s *Service) AddFace(ctx context.Context, imgBytes []byte, personID uuid.UUID) (uuid.UUID, error) {
 	// TODO: Use 'validate' for this?
 
-	if imgBytes == nil || len(imgBytes) == 0 {
+	if len(imgBytes) == 0 {
 		return uuid.Nil, errors.New(errMissingImage)
 	}
 

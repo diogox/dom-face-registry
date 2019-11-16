@@ -25,7 +25,10 @@ func run() error {
 	defer conn.Close()
 
 	res, err := c.GetPeople(context.Background(), &pb.GetPeopleRequest{})
-	fmt.Println(res)
+	if err != nil {
+		return err
+	}
 
+	fmt.Println(res)
 	return nil
 }
