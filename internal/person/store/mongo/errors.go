@@ -10,6 +10,4 @@ const (
 	errMongoFailedToInsertPerson = "could not insert person in mongo"
 
 	errMongoFailedToDeletePerson = "could not remove person in mongo"
-
-	errMongoInvalidID = "invalid id, could not convert"
 )
