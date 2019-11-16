@@ -7,6 +7,7 @@ jobs:
       steps:
         - checkout
 
+
         - restore_cache:
             keys:
               - proto-3.9.1
@@ -27,6 +28,20 @@ jobs:
             paths:
             - protoc-3.9.1-linux-x86_64.zip
 
+
+        - restore_cache:
+            key: go-mod-{{ checksum "go.sum" }}
+
+        - run:
+            name: Install dependencies
+            command: go mod vendor
+
+        - save_cache:
+            key: go-mod-v1-{{ checksum "go.sum" }}
+            paths:
+              - /go/pkg/mod
+
+
         - run:
             name: Generate files
             command: |
@@ -35,15 +50,14 @@ jobs:
               go generate -mod vendor ./gen
 
         - run:
-            name: Install dependencies
-            command: go mod vendor
-
-        - run:
             name: Run unit tests
-            command: |
-              go test ./...
+            command: go test ./...
 
         - setup_remote_docker
+
+
+        - restore_cache:
+            key: docker-cache
 
         - run:
             name: Install docker & docker-compose
@@ -52,6 +66,12 @@ jobs:
               curl -L https://github.com/docker/compose/releases/download/1.24.1/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
               chmod +x ~/docker-compose
               mv ~/docker-compose /usr/local/bin/docker-compose
+
+        - save_cache:
+            key: docker-cache
+            paths:
+              - /usr/local/bin/docker-compose
+
 
         - run:
             name: Start docker containers
