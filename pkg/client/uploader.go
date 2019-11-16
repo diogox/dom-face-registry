@@ -1,6 +1,6 @@
 package client
 
-const chunkSize = 64
+const chunkSize = 64 * 1024 // 64 KiB
 
 func UploadImageInChunks(imgBytes []byte, sendCallback func(chunk []byte) error) error {
 	// Send image
