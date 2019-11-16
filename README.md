@@ -1,4 +1,4 @@
-# Face Registry
+# Face Registry [![CircleCI](https://circleci.com/gh/diogox/dom-face-registry.svg?style=svg)](https://circleci.com/gh/diogox/dom-face-registry)
 
 This micro-service was designed to keep a registry of people whose faces can 
 be recognized when a picture of a face is sent to it.
