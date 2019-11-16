@@ -32,6 +32,6 @@ Bear in mind, like I said above, the service takes a while to get started...
 home management system. And "Dom" is Polish for "Home". I'm not Polish, though. :portugal:
 
 ## TODO
-[ ] Write unit tests
-
-[ ] Implement CI/CD
+[-] Finish writing unit tests
+[-] Write integration tests & add them to CircleCI config
+[-] Add example clients for ALL endpoints
