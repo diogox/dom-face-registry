@@ -6,6 +6,7 @@ COPY . .
 
 ARG DLIB_MODELS_DIRECTORY=/go/src/github.com/diogox/dom-face-registry/data/models
 
+RUN rm -rf $DLIB_MODELS_DIRECTORY
 RUN mkdir -p $DLIB_MODELS_DIRECTORY
 
 RUN wget -P $DLIB_MODELS_DIRECTORY http://dlib.net/files/shape_predictor_5_face_landmarks.dat.bz2 \
