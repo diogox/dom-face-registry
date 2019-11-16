@@ -6,7 +6,6 @@ import (
 	"github.com/google/uuid"
 	"github.com/pkg/errors"
 	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 
 	"github.com/diogox/dom-face-registry/internal/person"
@@ -124,13 +123,8 @@ func (s *Store) CreatePerson(ctx context.Context, person person.Person) error {
 func (s *Store) DeletePerson(ctx context.Context, id uuid.UUID) error {
 	const ID = "_id"
 
-	personID, err := primitive.ObjectIDFromHex(id.String())
-	if err != nil {
-		return errors.Wrap(err, errMongoInvalidID)
-	}
-
-	_, err = s.collection.DeleteOne(ctx, bson.M{
-		ID: personID,
+	_, err := s.collection.DeleteOne(ctx, bson.M{
+		ID: id.String(),
 	})
 	if err != nil {
 		return errors.Wrap(err, errMongoFailedToDeletePerson)
