@@ -123,7 +123,7 @@ func (s *Store) FindFacesByPersonID(ctx context.Context, personID uuid.UUID) ([]
 
 func (s *Store) AddFace(
 	ctx context.Context,
-	encoding recognizer.FaceEncoding,
+	encoding recognizer.Encoding,
 	imgBytes []byte,
 	personUID uuid.UUID,
 ) (uuid.UUID, error) {
