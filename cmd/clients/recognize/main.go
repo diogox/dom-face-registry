@@ -16,7 +16,7 @@ func main() {
 }
 
 const endpoint = ":8080"
-const imgPath = "data/photo1.jpg"
+const imgPath = "data/recognizable.jpg"
 
 func run() error {
 	c, conn, err := client.NewClientBuilder().

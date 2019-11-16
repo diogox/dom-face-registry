@@ -17,7 +17,7 @@ func main() {
 }
 
 const endpoint = ":8080"
-const imgPath = "data/test1.jpg"
+const imgPath = "data/addedFace.jpg"
 
 func run() error {
 	personId := os.Args[1]

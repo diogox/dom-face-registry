@@ -31,6 +31,36 @@ Bear in mind, like I said above, the service takes a while to get started...
 * The name starts with `dom` because I made this as part of making a 
 home management system. And "Dom" is Polish for "Home". I'm not Polish, though. :portugal:
 
+## Testing
+There are clients available for manual testing in the `cmd/clients` directory. 
+You can run them like so:
+
+```shell script
+go run ./cmd/clients/addPerson.go
+```
+
+This particular client will give you a `person id` you will need to pass as an 
+argument when adding a face:
+
+```shell script
+go run ./cmd/clients/addFace.go 77d71383-31c9-4339-9a61-feed335bba9f
+```
+
+Here, `77d71383-31c9-4339-9a61-feed335bba9f` is the `person id` we got from the previous 
+command.
+
+Other clients, like `removePerson` and `removeFace` also need IDs as arguments.
+
+To recognize a face, you'd use the `recognize` client. 
+
+You can use your own images by replacing the ones in the `data` directory.
+Replace `addedFace.jpg` and `recognizable.jpg` with your own pictures and 
+check the results!
+
+If you find that the recognizer is not working the way it should, you 
+can make it more, or less, "sensitive" by meddling with the threshold
+in `config.yaml`. A lower threshold makes false positives more likely.
+
 ## TODO
 [-] Finish writing unit tests
 
