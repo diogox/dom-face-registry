@@ -1,3 +1,5 @@
+//go:generate mockgen -package=grpc -source=./server.go -destination=./server_mocks.go -self_package=github.com/diogox/dom-face-registry/internal/transport/grpc
+
 package grpc
 
 import (
