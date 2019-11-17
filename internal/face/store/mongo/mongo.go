@@ -160,7 +160,7 @@ func (s *Store) RemoveFace(ctx context.Context, faceID uuid.UUID) error {
 	const ID = "_id"
 
 	removed, err := s.collection.DeleteOne(ctx, bson.M{
-		ID: faceID,
+		ID: faceID.String(),
 	})
 	if err != nil {
 		return errors.Wrap(err, errMongoFailedToRemoveFace)
