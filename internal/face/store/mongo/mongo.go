@@ -79,7 +79,7 @@ func (s *Store) FindFacesByPersonID(ctx context.Context, personID uuid.UUID) ([]
 	const PersonIDKey = "person_id"
 
 	cur, err := s.collection.Find(ctx, bson.M{
-		PersonIDKey: personID,
+		PersonIDKey: personID.String(),
 	})
 	if err != nil {
 		return nil, errors.Wrap(err, errMongoFailedToGetFaces)
