@@ -56,8 +56,8 @@ jobs:
               ./bin/golangci-lint run
 
         - run:
-            name: Run unit tests
-            command: go test ./...
+            name: Run unit/integration tests
+            command: go test -v -tags=integration -vet all ./...
 
         - setup_remote_docker
 
