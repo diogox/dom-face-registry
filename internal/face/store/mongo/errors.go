@@ -10,5 +10,6 @@ const (
 
 	errMongoFailedToRemoveFace =  "could not remove face in mongo"
 
+	errMongoInvalidPersonID       = "person id is nil"
 	errMongoInvalidInsertedFaceID = "invalid inserted face id type"
 )

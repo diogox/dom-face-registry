@@ -86,7 +86,7 @@ func (s *Store) FindFacesByPersonID(ctx context.Context, personID uuid.UUID) ([]
 	}
 	defer cur.Close(ctx)
 
-	var faces []face.Face
+	faces := make([]face.Face, 0)
 	for cur.Next(ctx) {
 		var f Face
 
@@ -128,6 +128,10 @@ func (s *Store) AddFace(
 	personUID uuid.UUID,
 ) (uuid.UUID, error) {
 
+	if personUID == uuid.Nil {
+		return uuid.Nil, errors.New(errMongoInvalidPersonID)
+	}
+
 	insertedResult, err := s.collection.InsertOne(ctx, Face{
 		ID:          uuid.New().String(),
 		Encoding:    encoding,
@@ -155,11 +159,15 @@ func (s *Store) AddFace(
 func (s *Store) RemoveFace(ctx context.Context, faceID uuid.UUID) error {
 	const ID = "_id"
 
-	_, err := s.collection.DeleteOne(ctx, bson.M{
+	removed, err := s.collection.DeleteOne(ctx, bson.M{
 		ID: faceID,
 	})
 	if err != nil {
 		return errors.Wrap(err, errMongoFailedToRemoveFace)
+	}
+
+	if removed.DeletedCount == 0 {
+		return errors.Wrapf(errors.New("no face found for given id"), errMongoFailedToRemoveFace)
 	}
 
 	return nil
