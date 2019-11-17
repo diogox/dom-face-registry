@@ -15,3 +15,9 @@ download-models:
     	    && bzip2 -d ${DLIB_MODELS_DIRECTORY}/dlib_face_recognition_resnet_model_v1.dat.bz2 
 	wget -P ${DLIB_MODELS_DIRECTORY} http://dlib.net/files/mmod_human_face_detector.dat.bz2 \
     	    && bzip2 -d ${DLIB_MODELS_DIRECTORY}/mmod_human_face_detector.dat.bz2
+
+test:
+	go test -v -vet all ./...
+
+test-all:
+	go test -v -tags=integration -vet all ./...
