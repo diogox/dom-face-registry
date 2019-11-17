@@ -123,11 +123,15 @@ func (s *Store) CreatePerson(ctx context.Context, person person.Person) error {
 func (s *Store) DeletePerson(ctx context.Context, id uuid.UUID) error {
 	const ID = "_id"
 
-	_, err := s.collection.DeleteOne(ctx, bson.M{
+	deleted, err := s.collection.DeleteOne(ctx, bson.M{
 		ID: id.String(),
 	})
 	if err != nil {
 		return errors.Wrap(err, errMongoFailedToDeletePerson)
+	}
+
+	if deleted.DeletedCount == 0 {
+		return errors.Wrapf(errors.New("no person found for given id"), errMongoFailedToDeletePerson)
 	}
 
 	return nil
