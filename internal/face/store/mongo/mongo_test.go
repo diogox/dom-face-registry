@@ -25,7 +25,7 @@ func setupStore(t *testing.T) (*Store, *mongo.Collection, func()) {
 
 	const (
 		dbName         = "dom-face-registry"
-		collectionName = "faces"
+		collectionName = "test-faces"
 	)
 
 	client, err := mongo.Connect(ctx, options.Client().ApplyURI(
@@ -76,6 +76,18 @@ func TestStore_GetFaces(t *testing.T) {
 		assert.NoError(t, err)
 		assert.Equal(t, len(faces), 1)
 		assert.Equal(t, faces[0], expected)
+	})
+
+	t.Run("should return an empty slice if no faces are found", func(t *testing.T) {
+		store, _, cleanup := setupStore(t)
+		defer cleanup()
+
+		ctx := context.Background()
+
+		faces, err := store.GetFaces(ctx)
+		assert.NoError(t, err)
+		assert.IsType(t, faces, []face.Face{})
+		assert.Equal(t, len(faces), 0)
 	})
 
 	t.Run("should fail when", func(t *testing.T) {
