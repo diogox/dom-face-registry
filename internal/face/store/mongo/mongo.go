@@ -86,7 +86,7 @@ func (s *Store) FindFacesByPersonID(ctx context.Context, personID uuid.UUID) ([]
 	}
 	defer cur.Close(ctx)
 
-	faces := make([]face.Face, 0)
+	var faces []face.Face
 	for cur.Next(ctx) {
 		var f Face
 
