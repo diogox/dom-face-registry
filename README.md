@@ -60,8 +60,3 @@ check the results!
 If you find that the recognizer is not working the way it should, you 
 can make it more, or less, "sensitive" by meddling with the threshold
 in `config.yaml`. A lower threshold makes false positives more likely.
-
-## TODO
-[-] Finish writing unit tests
-
-[-] Write integration tests & add them to CircleCI config
